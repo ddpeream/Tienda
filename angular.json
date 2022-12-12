@@ -158,5 +158,8 @@
       }
     }
   },
-  "defaultProject": "Tienda"
+  "defaultProject": "Tienda",
+  "cli": {
+    "analytics": "6c20fada-0cee-45cf-bc3a-324fbc2c3ae3"
+  }
 }
