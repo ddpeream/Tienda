@@ -1,0 +1,53 @@
+/* ============================================
+   🎨 HOME COMPONENT STYLES
+   ============================================ */
+
+.featured-products {
+    padding: 60px 0 40px;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+}
+
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #667EEA15 0%, #764BA215 100%);
+    border-radius: 50px;
+    margin-bottom: 20px;
+    
+    mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        color: #667EEA;
+    }
+    
+    span {
+        font-size: 14px;
+        font-weight: 700;
+        color: #667EEA;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+}
+
+.section-title {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900;
+    color: #2D3436;
+    margin: 0 0 16px;
+    line-height: 1.2;
+}
+
+.section-subtitle {
+    font-size: 18px;
+    color: #636E72;
+    margin: 0;
+    line-height: 1.6;
+}

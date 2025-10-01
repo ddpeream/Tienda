@@ -1,43 +1,124 @@
-<mat-horizontal-stepper>
-    <mat-step>
-        <ng-template matStepLabel>Sus Productos</ng-template>
-        <div *ngIf="(products$ | async) as products" >
-            <p *ngIf="products.length === 0" >No hay productos</p>
-            <div class="row" *ngFor="let product of products">
-                <div class="col-xs-12 col-sm-2 col-md-2">
-                  <div class="box">
-                    <img class="image" [src]="product.image" alt="">
-                  </div>
-                </div>
-                <div class="col-xs-12 col-sm-5 col-md-5">
-                  <div class="box">
-                    {{ product.title }}
-                  </div>
-                </div>
-                <div class="col-xs-12 col-sm-5 col-md-5">
-                  <div class="box">
-                    {{ product.price }}
-                  </div>
-                </div>
-              </div>
+<div class="cart-page">
+    <div class="cart-container">
+        <div class="cart-header">
+            <h1>🛒 Mi Carrito</h1>
+            <p class="cart-subtitle">Revisa tus productos antes de finalizar la compra</p>
         </div>
-    </mat-step>
 
-    <mat-step>
-        <ng-template matStepLabel>Datos Personales</ng-template>
-        <ul>
-            <li *ngFor="let product of (products$ | async)">
-                {{product.id}}
-            </li>
-        </ul>
-    </mat-step>
+        <div *ngIf="(cartItems$ | async) as items; else loading">
+            <!-- Carrito vacío -->
+            <div *ngIf="items.length === 0" class="empty-cart">
+                <div class="empty-cart-icon">🛍️</div>
+                <h2>Tu carrito está vacío</h2>
+                <p>¡Agrega productos increíbles para comenzar a comprar!</p>
+                <a routerLink="/products" class="btn-primary">
+                    <span>Explorar Productos</span>
+                    <span class="icon">→</span>
+                </a>
+            </div>
 
-    <mat-step>
-        <ng-template matStepLabel>Pago</ng-template>
-        <ul>
-            <li *ngFor="let product of (products$ | async)">
-                {{product.description}}
-            </li>
-        </ul>
-    </mat-step>
-</mat-horizontal-stepper>
+            <!-- Carrito con items -->
+            <div *ngIf="items.length > 0" class="cart-content">
+                <div class="cart-items">
+                    <div class="cart-item" *ngFor="let item of items">
+                        <div class="item-image">
+                            <img [src]="item.product.image" [alt]="item.product.title">
+                        </div>
+                        
+                        <div class="item-details">
+                            <h3>{{ item.product.title }}</h3>
+                            <p class="item-category">{{ item.product.category }}</p>
+                            <p class="item-description">{{ item.product.description | slice:0:100 }}...</p>
+                        </div>
+
+                        <div class="item-quantity">
+                            <button class="qty-btn" (click)="decreaseQuantity(item.product.id)">
+                                <span>−</span>
+                            </button>
+                            <span class="qty-value">{{ item.quantity }}</span>
+                            <button class="qty-btn" (click)="increaseQuantity(item.product.id)">
+                                <span>+</span>
+                            </button>
+                        </div>
+
+                        <div class="item-price">
+                            <p class="price-label">Precio unitario</p>
+                            <p class="unit-price">${{ item.product.price | number:'1.2-2' }}</p>
+                            <p class="price-label">Subtotal</p>
+                            <p class="total-price">${{ item.product.price * item.quantity | number:'1.2-2' }}</p>
+                        </div>
+
+                        <button class="item-remove" (click)="removeItem(item.product.id)">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Resumen de orden -->
+                <div class="order-summary">
+                    <div class="summary-card">
+                        <h2>📋 Resumen del Pedido</h2>
+                        
+                        <div class="summary-line">
+                            <span>Subtotal ({{ getTotalItems() }} items)</span>
+                            <span>${{ getSubtotal() | number:'1.2-2' }}</span>
+                        </div>
+                        
+                        <div class="summary-line">
+                            <span>Envío</span>
+                            <span class="shipping-free">GRATIS 🎉</span>
+                        </div>
+
+                        <div class="summary-line discount">
+                            <span>Descuento</span>
+                            <span>-${{ getDiscount() | number:'1.2-2' }}</span>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span class="total-amount">${{ getTotal() | number:'1.2-2' }}</span>
+                        </div>
+
+                        <div class="promo-code">
+                            <input type="text" placeholder="Código de descuento" [(ngModel)]="promoCode">
+                            <button class="btn-apply" (click)="applyPromoCode()">Aplicar</button>
+                        </div>
+
+                        <button class="btn-checkout" (click)="checkout()">
+                            <span>Proceder al Pago</span>
+                            <span class="icon">💳</span>
+                        </button>
+
+                        <button class="btn-continue" routerLink="/products">
+                            ← Continuar Comprando
+                        </button>
+
+                        <div class="trust-badges">
+                            <div class="badge">
+                                <span class="badge-icon">🔒</span>
+                                <span>Pago Seguro</span>
+                            </div>
+                            <div class="badge">
+                                <span class="badge-icon">📦</span>
+                                <span>Envío Gratis</span>
+                            </div>
+                            <div class="badge">
+                                <span class="badge-icon">↩️</span>
+                                <span>Devolución Fácil</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #loading>
+            <div class="loading">
+                <mat-spinner></mat-spinner>
+                <p>Cargando carrito...</p>
+            </div>
+        </ng-template>
+    </div>
+</div>

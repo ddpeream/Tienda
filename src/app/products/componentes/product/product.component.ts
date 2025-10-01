@@ -6,6 +6,7 @@ import {
     OnChanges, 
     SimpleChanges,
     OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 import { CartService } from 'src/app/core/service/cart/cart.service'
 
 import { Product } from '../../../core/model/product.model'
@@ -20,7 +21,8 @@ import { Product } from '../../../core/model/product.model'
 export class ProductComponent implements OnChanges, OnInit {
     
     constructor(
-        private cartservice: CartService
+        private cartservice: CartService,
+        private router: Router
     ) {
         console.log('1.')
     }
@@ -41,7 +43,12 @@ export class ProductComponent implements OnChanges, OnInit {
     today = new Date()
     
     addCart () {
-        console.log('Me agregaron mano')
-        this.cartservice.addCart(this.products)
+        console.log('Producto agregado al carrito:', this.products.title)
+        this.cartservice.addCart(this.products, 1)
+    }
+
+    buyNow() {
+        this.cartservice.addCart(this.products, 1)
+        this.router.navigate(['/order'])
     }
 }

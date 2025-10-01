@@ -1,17 +1,68 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <div class="row between-xs middle-xs header-row">
-            <nav>
-                <a mat-button routerLink="/home" routerLinkActive="active" >Home</a>
-                <a mat-button routerLink="/products" routerLinkActive="active" >Productos</a>
-                <a mat-button routerLink="/contact" routerLinkActive="active" >Contacto</a>
-            </nav>
-            <a routerLink="order" mat-raised-button [matBadge]="total$ | async" matBadgeColor="warn">
-                <mat-icon >shopping_cart</mat-icon>
-                Carrito
-            </a>
+<header class="modern-header">
+    <nav class="nav-container">
+        <div class="nav-content">
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <a routerLink="/home" class="logo">
+                    <span class="logo-icon">🛍️</span>
+                    <span class="logo-text">
+                        <span class="logo-main">Elite</span>
+                        <span class="logo-sub">Store</span>
+                    </span>
+                </a>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="nav-links">
+                <a mat-button routerLink="/home" routerLinkActive="active" class="nav-link">
+                    <mat-icon>home</mat-icon>
+                    <span>Inicio</span>
+                </a>
+                <a mat-button routerLink="/products" routerLinkActive="active" class="nav-link">
+                    <mat-icon>shopping_bag</mat-icon>
+                    <span>Productos</span>
+                </a>
+                <a mat-button routerLink="/contact" routerLinkActive="active" class="nav-link">
+                    <mat-icon>contact_mail</mat-icon>
+                    <span>Contacto</span>
+                </a>
+            </div>
+
+            <!-- Cart Section -->
+            <div class="cart-section">
+                <a routerLink="order" class="cart-button" [matBadge]="total$ | async" matBadgeColor="warn" matBadgeSize="small">
+                    <mat-icon class="cart-icon">shopping_cart</mat-icon>
+                    <span class="cart-text">Carrito</span>
+                    <span class="cart-count" *ngIf="(total$ | async) as total">{{ total }}</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" mat-icon-button (click)="toggleMobileMenu()">
+                <mat-icon>{{ mobileMenuOpen ? 'close' : 'menu' }}</mat-icon>
+            </button>
         </div>
 
-
-    </mat-toolbar-row>
-</mat-toolbar>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" [class.open]="mobileMenuOpen">
+            <a mat-button routerLink="/home" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()">
+                <mat-icon>home</mat-icon>
+                <span>Inicio</span>
+            </a>
+            <a mat-button routerLink="/products" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()">
+                <mat-icon>shopping_bag</mat-icon>
+                <span>Productos</span>
+            </a>
+            <a mat-button routerLink="/contact" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()">
+                <mat-icon>contact_mail</mat-icon>
+                <span>Contacto</span>
+            </a>
+            <div class="mobile-divider"></div>
+            <a routerLink="order" class="mobile-cart-link" (click)="closeMobileMenu()">
+                <mat-icon>shopping_cart</mat-icon>
+                <span>Mi Carrito</span>
+                <span class="mobile-cart-badge" *ngIf="(total$ | async) as total">{{ total }}</span>
+            </a>
+        </div>
+    </nav>
+</header>

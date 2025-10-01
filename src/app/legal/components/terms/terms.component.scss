@@ -1,0 +1,137 @@
+.legal-page {
+    background: #F8F9FA;
+    padding: 60px 0 80px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.legal-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 60px 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+
+.legal-icon {
+    font-size: 80px;
+    width: 80px;
+    height: 80px;
+    color: #667EEA;
+    margin: 0 auto 1.5rem;
+}
+
+.legal-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #2D3436;
+    margin-bottom: 1rem;
+}
+
+.legal-date {
+    font-size: 1rem;
+    color: #636E72;
+    font-weight: 500;
+}
+
+.legal-content {
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+}
+
+.legal-section {
+    margin-bottom: 3rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2D3436;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 3px solid #667EEA;
+    }
+
+    p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #636E72;
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        margin: 1.5rem 0;
+        padding-left: 2rem;
+
+        li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #636E72;
+            margin-bottom: 0.8rem;
+            position: relative;
+
+            &::marker {
+                color: #667EEA;
+            }
+        }
+    }
+
+    strong {
+        color: #2D3436;
+        font-weight: 600;
+    }
+}
+
+.legal-footer {
+    text-align: center;
+}
+
+.btn-contact {
+    padding: 18px 50px !important;
+    border-radius: 50px !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%) !important;
+    color: white !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    transition: all 0.3s ease !important;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .legal-title {
+        font-size: 2rem;
+    }
+
+    .legal-content {
+        padding: 30px 25px;
+    }
+
+    .legal-section {
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        p, ul li {
+            font-size: 1rem;
+        }
+    }
+}
