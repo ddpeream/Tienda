@@ -1,47 +1,164 @@
-<footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-md-4">
-          <div class="box">
-            <h3>Productos</h3>
-            <ul>
-              <li>
-                <a routerLink="/products" [queryParams]="{ type: 'news' }"
-                  >Nuevos Productos</a
-                >
-              </li>
-              <li>
-                <a routerLink="/products" [queryParams]="{ type: 'offer' }"
-                  >En oferta</a
-                >
-              </li>
-              <li>
-                <a routerLink="/products" [queryParams]="{ type: 'latest' }"
-                  >Últimos productos</a
-                >
-              </li>
-            </ul>
-          </div>
+<footer class="modern-footer">
+    <div class="footer-main">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Brand Section -->
+                <div class="footer-column brand-column">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🛍️</span>
+                        <div class="logo-text">
+                            <span class="logo-main">Elite Store</span>
+                            <span class="logo-sub">Premium Shopping</span>
+                        </div>
+                    </div>
+                    <p class="brand-description">
+                        Tu destino de compras en línea para productos de alta calidad y diseño excepcional. 
+                        Transformamos la experiencia de compra en algo extraordinario.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <mat-icon>facebook</mat-icon>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <mat-icon>camera_alt</mat-icon>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <mat-icon>flutter_dash</mat-icon>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <mat-icon>play_circle</mat-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div class="footer-column">
+                    <h3 class="footer-title">
+                        <mat-icon>inventory_2</mat-icon>
+                        Productos
+                    </h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a routerLink="/products" [queryParams]="{ type: 'news' }">
+                                <mat-icon>fiber_new</mat-icon>
+                                Nuevos Productos
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/products" [queryParams]="{ type: 'offer' }">
+                                <mat-icon>local_offer</mat-icon>
+                                En Oferta
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/products" [queryParams]="{ type: 'latest' }">
+                                <mat-icon>trending_up</mat-icon>
+                                Más Vendidos
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/products" [queryParams]="{ type: 'featured' }">
+                                <mat-icon>star</mat-icon>
+                                Destacados
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Company Section -->
+                <div class="footer-column">
+                    <h3 class="footer-title">
+                        <mat-icon>business</mat-icon>
+                        Compañía
+                    </h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a routerLink="/about-us">
+                                <mat-icon>info</mat-icon>
+                                Sobre Nosotros
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/stores">
+                                <mat-icon>store</mat-icon>
+                                Nuestras Tiendas
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/contact">
+                                <mat-icon>contact_mail</mat-icon>
+                                Contacto
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/contact">
+                                <mat-icon>work</mat-icon>
+                                Trabaja con Nosotros
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter Section -->
+                <div class="footer-column newsletter-column">
+                    <h3 class="footer-title">
+                        <mat-icon>email</mat-icon>
+                        Newsletter
+                    </h3>
+                    <p class="newsletter-description">
+                        Suscríbete para recibir ofertas exclusivas y las últimas novedades.
+                    </p>
+                    <div class="newsletter-form">
+                        <mat-form-field appearance="outline" class="newsletter-input">
+                            <mat-icon matPrefix>mail_outline</mat-icon>
+                            <input matInput placeholder="tu@email.com" type="email" [formControl]="emailField">
+                            <mat-error *ngIf="emailField.invalid">Email inválido</mat-error>
+                        </mat-form-field>
+                        <button mat-raised-button class="newsletter-btn" 
+                                (click)="sendMail()" 
+                                [disabled]="emailField.invalid">
+                            <mat-icon>send</mat-icon>
+                            Suscribir
+                        </button>
+                    </div>
+                    <div class="newsletter-benefits">
+                        <div class="benefit-item">
+                            <mat-icon>check_circle</mat-icon>
+                            <span>Descuentos exclusivos</span>
+                        </div>
+                        <div class="benefit-item">
+                            <mat-icon>check_circle</mat-icon>
+                            <span>Acceso anticipado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-12 col-md-4">
-          <div class="box">
-            <h3>Acerca de PlatziStore</h3>
-            <ul>
-              <li><a routerLink="/about-us">Sobre nosotros</a></li>
-              <li><a routerLink="/stores">Nuestras tiendas</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-          <div class="box">
-            <h3>Contacto</h3>
-              <mat-form-field>
-                <input placeholder="Digite su correo" matInput type="email" [formControl]="emailField" matInput placeholder="Su correo" type="email">
-              </mat-form-field>
-              <button (click)="sendMail()"  [disabled]="emailField.invalid" mat-raised-button>Enviar</button>
-          </div>
-        </div>
-      </div>
     </div>
-  </footer>
-  
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-content">
+                <p class="copyright">
+                    © 2025 <strong>Elite Store</strong>. Todos los derechos reservados.
+                </p>
+                <div class="payment-methods">
+                    <span class="payment-text">Aceptamos:</span>
+                    <div class="payment-icons">
+                        <mat-icon>credit_card</mat-icon>
+                        <mat-icon>account_balance</mat-icon>
+                        <mat-icon>payment</mat-icon>
+                    </div>
+                </div>
+                <div class="footer-links-bottom">
+                    <a routerLink="/terms">Términos</a>
+                    <span class="divider">•</span>
+                    <a routerLink="/privacy">Privacidad</a>
+                    <span class="divider">•</span>
+                    <a routerLink="/cookies">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

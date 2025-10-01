@@ -1,25 +1,70 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>{{products.title | uppercase}}</mat-card-title>
-        <mat-card-subtitle>{{products.price | currency}}</mat-card-subtitle>
-    </mat-card-header>
-    
-    <div class="crop-image">
-        <img [src]="products.image" alt="foto">
+<div class="product-card">
+    <!-- Image Container with Hover Effect -->
+    <div class="product-image-container">
+        <div class="product-badge" *ngIf="products.price < 100">
+            <span>Oferta</span>
+        </div>
+        <div class="product-wishlist">
+            <button mat-icon-button class="wishlist-btn">
+                <mat-icon>favorite_border</mat-icon>
+            </button>
+        </div>
+        <img [src]="products.image" [alt]="products.title" class="product-image">
+        <div class="product-overlay">
+            <button mat-raised-button class="quick-view-btn" [routerLink]="['/products', products.id]">
+                <mat-icon>visibility</mat-icon>
+                Vista Rápida
+            </button>
+        </div>
     </div>
-    
-    <mat-card-content>
-        <p>{{products.description | slice:0:10}}</p>
-    </mat-card-content>
 
-    <mat-card-actions>
-        <a mat-raised-button [routerLink]="['/products', products.id]">Ver Detalles</a>
-        <button mat-raised-button color="primary" (click)="addCart()" >Agregar al carrito</button>
-    </mat-card-actions>
-</mat-card>
+    <!-- Product Info -->
+    <div class="product-info">
+        <div class="product-category">
+            <span>Categoría Premium</span>
+        </div>
+        
+        <h3 class="product-title" [routerLink]="['/products', products.id]">
+            {{ products.title }}
+        </h3>
+        
+        <p class="product-description">
+            {{ products.description | slice:0:80 }}{{ products.description.length > 80 ? '...' : '' }}
+        </p>
 
-    <!-- <h3 appHighlight>{{products.title | uppercase}}</h3>
-    <strong>{{products.price | currency}}</strong>
-    <p>{{products.description | slice:0:13}}</p>
-    <p>{{ today | date:'HH:mm'}}</p>
-     -->
+        <!-- Rating -->
+        <div class="product-rating">
+            <div class="stars">
+                <mat-icon *ngFor="let star of [1,2,3,4,5]">star</mat-icon>
+            </div>
+            <span class="rating-count">(4.8)</span>
+        </div>
+
+        <!-- Price and Actions -->
+        <div class="product-footer">
+            <div class="price-container">
+                <span class="current-price">{{ products.price | currency }}</span>
+                <span class="old-price" *ngIf="products.price < 100">{{ products.price * 1.5 | currency }}</span>
+            </div>
+            
+            <div class="action-btns">
+                <button mat-mini-fab class="add-cart-btn" (click)="addCart()" color="primary" 
+                        [matTooltip]="'Agregar al carrito'" matTooltipPosition="top">
+                    <mat-icon>shopping_cart</mat-icon>
+                </button>
+                <button mat-mini-fab class="buy-now-btn" (click)="buyNow()" 
+                        [matTooltip]="'Comprar ahora'" matTooltipPosition="top">
+                    <mat-icon>flash_on</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- Stock Indicator -->
+        <div class="stock-indicator">
+            <div class="stock-bar">
+                <div class="stock-fill" [style.width]="'75%'"></div>
+            </div>
+            <span class="stock-text">¡Solo quedan 15 unidades!</span>
+        </div>
+    </div>
+</div>

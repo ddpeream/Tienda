@@ -10,19 +10,27 @@ import { CartService } from 'src/app/core/service/cart/cart.service';
 })
 export class HeaderComponent implements OnInit {
 
-  total$:Observable<number>
+  total$: Observable<number>;
+  mobileMenuOpen = false;
 
   constructor(
     private cartservice: CartService
   ) {
     this.total$ = this.cartservice.cart$
     .pipe(
-      map(rta => rta.length)
+      map(items => items.reduce((count, item) => count + item.quantity, 0))
     )
-
-   }
+  }
 
   ngOnInit(): void {
+  }
+
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  closeMobileMenu(): void {
+    this.mobileMenuOpen = false;
   }
 
 }
