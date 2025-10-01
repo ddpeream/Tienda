@@ -18,7 +18,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
 import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu';
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -41,8 +43,9 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatMenuModule,
     LayoutModule,
     MatFormFieldModule,
-    MatStepperModule
-    
+    MatStepperModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatToolbarModule,
@@ -62,7 +65,9 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatMenuModule,
     LayoutModule,
     MatFormFieldModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }

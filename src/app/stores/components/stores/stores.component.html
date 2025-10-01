@@ -1,0 +1,124 @@
+<div class="stores-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Nuestras Tiendas</h1>
+                <p class="hero-subtitle">Visítanos y descubre la experiencia Elite Store</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card" *ngFor="let feature of features">
+                    <div class="feature-icon">
+                        <mat-icon>{{ feature.icon }}</mat-icon>
+                    </div>
+                    <h3 class="feature-title">{{ feature.title }}</h3>
+                    <p class="feature-description">{{ feature.description }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stores Section -->
+    <section class="stores-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Encuentra tu Tienda Más Cercana</h2>
+                <p class="section-description">
+                    Visítanos en cualquiera de nuestras ubicaciones en toda España
+                </p>
+            </div>
+
+            <div class="stores-grid">
+                <div class="store-card" *ngFor="let store of stores">
+                    <div class="store-image">
+                        <img [src]="store.image" [alt]="store.name">
+                        <div class="store-badge">
+                            <mat-icon>store</mat-icon>
+                        </div>
+                    </div>
+                    <div class="store-content">
+                        <h3 class="store-name">{{ store.name }}</h3>
+                        
+                        <div class="store-info">
+                            <div class="info-item">
+                                <mat-icon>location_on</mat-icon>
+                                <span>{{ store.address }}</span>
+                            </div>
+                            <div class="info-item">
+                                <mat-icon>phone</mat-icon>
+                                <a [href]="'tel:' + store.phone">{{ store.phone }}</a>
+                            </div>
+                            <div class="info-item">
+                                <mat-icon>email</mat-icon>
+                                <a [href]="'mailto:' + store.email">{{ store.email }}</a>
+                            </div>
+                            <div class="info-item">
+                                <mat-icon>schedule</mat-icon>
+                                <span>{{ store.hours }}</span>
+                            </div>
+                        </div>
+
+                        <div class="store-actions">
+                            <a [href]="'https://www.google.com/maps/search/?api=1&query=' + store.latitude + ',' + store.longitude" 
+                               target="_blank"
+                               mat-raised-button 
+                               class="btn-directions">
+                                <mat-icon>directions</mat-icon>
+                                Cómo Llegar
+                            </a>
+                            <a [href]="'tel:' + store.phone" 
+                               mat-stroked-button 
+                               class="btn-call">
+                                <mat-icon>phone</mat-icon>
+                                Llamar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <div class="map-header">
+                <h2 class="map-title">Todas Nuestras Ubicaciones</h2>
+                <p class="map-description">Encuentra la tienda Elite Store más cercana a ti</p>
+            </div>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/d/embed?mid=1KRb0Pq3JfDlDJz0HDQB5RhZBLdI&ehbc=2E312F" 
+                    width="100%" 
+                    height="600"
+                    style="border:0; border-radius: 20px;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <mat-icon class="cta-icon">store</mat-icon>
+                <h2 class="cta-title">¿No Encuentras lo que Buscas?</h2>
+                <p class="cta-description">
+                    Contacta con cualquiera de nuestras tiendas y estaremos encantados de ayudarte
+                </p>
+                <a routerLink="/contact" mat-raised-button class="btn-contact">
+                    <mat-icon>support_agent</mat-icon>
+                    Contactar con Nosotros
+                </a>
+            </div>
+        </div>
+    </section>
+</div>

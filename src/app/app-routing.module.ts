@@ -40,6 +40,21 @@ const routes: Routes = [
       },
 
       {
+        path: 'about-us',
+        loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
+      },
+
+      {
+        path: 'stores',
+        loadChildren: () => import('./stores/stores.module').then(m => m.StoresModule)
+      },
+
+      {
+        path: '',
+        loadChildren: () => import('./legal/legal.module').then(m => m.LegalModule)
+      },
+
+      {
           path: 'demo',
         loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)
       },

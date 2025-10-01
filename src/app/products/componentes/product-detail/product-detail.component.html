@@ -1,12 +1,167 @@
-<div *ngIf="product">
-    <div>
-        <img [src]="product.image" alt="">
+<div class="product-detail-page" *ngIf="product">
+    <div class="container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a routerLink="/home">
+                <mat-icon>home</mat-icon>
+                Inicio
+            </a>
+            <mat-icon>chevron_right</mat-icon>
+            <a routerLink="/products">Productos</a>
+            <mat-icon>chevron_right</mat-icon>
+            <span>{{ product.title }}</span>
+        </nav>
+
+        <div class="product-detail-grid">
+            <!-- Image Section -->
+            <div class="image-section">
+                <div class="main-image">
+                    <div class="image-badge">
+                        <span *ngIf="product.price < 100">🔥 Oferta</span>
+                    </div>
+                    <img [src]="product.image" [alt]="product.title" [title]="product.title">
+                </div>
+                <div class="image-thumbnails">
+                    <div class="thumbnail active">
+                        <img [src]="product.image" [alt]="product.title">
+                    </div>
+                    <div class="thumbnail">
+                        <img [src]="product.image" [alt]="product.title">
+                    </div>
+                    <div class="thumbnail">
+                        <img [src]="product.image" [alt]="product.title">
+                    </div>
+                    <div class="thumbnail">
+                        <img [src]="product.image" [alt]="product.title">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <div class="product-category">
+                    <mat-icon>label</mat-icon>
+                    Categoría Premium
+                </div>
+
+                <h1 class="product-name">{{ product.title }}</h1>
+
+                <div class="product-rating">
+                    <div class="stars">
+                        <mat-icon *ngFor="let star of [1,2,3,4,5]">star</mat-icon>
+                    </div>
+                    <span class="rating-text">(4.8)</span>
+                    <span class="reviews-count">124 reseñas</span>
+                </div>
+
+                <div class="price-section">
+                    <div class="current-price">{{ product.price | currency }}</div>
+                    <div class="old-price" *ngIf="product.price < 100">{{ product.price * 1.5 | currency }}</div>
+                    <div class="discount-badge" *ngIf="product.price < 100">
+                        -{{ ((1 - product.price / (product.price * 1.5)) * 100).toFixed(0) }}%
+                    </div>
+                </div>
+
+                <div class="product-description">
+                    <h3>
+                        <mat-icon>description</mat-icon>
+                        Descripción
+                    </h3>
+                    <p>{{ product.description }}</p>
+                </div>
+
+                <div class="product-features">
+                    <h3>
+                        <mat-icon>verified</mat-icon>
+                        Características
+                    </h3>
+                    <ul>
+                        <li>
+                            <mat-icon>check_circle</mat-icon>
+                            Calidad premium garantizada
+                        </li>
+                        <li>
+                            <mat-icon>check_circle</mat-icon>
+                            Envío gratis en pedidos superiores a $50
+                        </li>
+                        <li>
+                            <mat-icon>check_circle</mat-icon>
+                            Devolución gratuita en 30 días
+                        </li>
+                        <li>
+                            <mat-icon>check_circle</mat-icon>
+                            Garantía de satisfacción 100%
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="product-stock">
+                    <div class="stock-info">
+                        <mat-icon>inventory_2</mat-icon>
+                        <span>Solo quedan <strong>15 unidades</strong> disponibles</span>
+                    </div>
+                    <div class="stock-bar">
+                        <div class="stock-fill" [style.width]="'75%'"></div>
+                    </div>
+                </div>
+
+                <div class="quantity-selector">
+                    <label>Cantidad:</label>
+                    <div class="quantity-controls">
+                        <button mat-icon-button (click)="decreaseQuantity()">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                        <input type="number" [value]="quantity" min="1" readonly>
+                        <button mat-icon-button (click)="increaseQuantity()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button mat-raised-button class="add-to-cart-btn" (click)="addToCart()">
+                        <mat-icon>shopping_cart</mat-icon>
+                        Agregar al Carrito
+                    </button>
+                    <button mat-raised-button class="buy-now-btn" (click)="buyNow()">
+                        <mat-icon>flash_on</mat-icon>
+                        Comprar Ahora
+                    </button>
+                    <button mat-stroked-button class="wishlist-btn">
+                        <mat-icon>favorite_border</mat-icon>
+                    </button>
+                </div>
+
+                <div class="trust-badges">
+                    <div class="trust-item">
+                        <mat-icon>local_shipping</mat-icon>
+                        <div>
+                            <strong>Envío Rápido</strong>
+                            <span>Entrega en 2-3 días</span>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <mat-icon>lock</mat-icon>
+                        <div>
+                            <strong>Pago Seguro</strong>
+                            <span>Cifrado SSL 256-bit</span>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <mat-icon>support_agent</mat-icon>
+                        <div>
+                            <strong>Soporte 24/7</strong>
+                            <span>Estamos aquí para ayudar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <ul>
-            <li>Nombre: {{product.title | uppercase}} </li>
-            <li>Precio: {{product.price | currency}} </li>
-        </ul>
-        <p> {{product.description}} </p>
-    </div>
+</div>
+
+<!-- Loading State -->
+<div class="loading-state" *ngIf="!product">
+    <mat-spinner></mat-spinner>
+    <p>Cargando producto...</p>
 </div>
